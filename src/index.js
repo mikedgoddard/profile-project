@@ -2,6 +2,45 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
+// Create skills object
+const skillsData = [
+	{
+		skill: 'HTML',
+		level: 'Advanced',
+		bgColor: '#BCE7FD',
+		fgColor: '#000',
+	},
+	{
+		skill: 'CSS/Sass',
+		level: 'Advanced',
+		bgColor: '#9CDCFC',
+		fgColor: '#000',
+	},
+	{
+		skill: 'JavaScript',
+		level: 'Proficient',
+		bgColor: '#AF3B6E',
+		fgColor: '#fff',
+	},
+	{
+		skill: 'ReactJS',
+		level: 'Beginner',
+		bgColor: '#6B2443',
+		fgColor: '#fff',
+	},
+	{
+		skill: 'Git/GitHub',
+		level: 'Proficient',
+		bgColor: '#FF781F',
+		fgColor: '#fff',
+	},
+	{
+		skill: 'Web Accessibility',
+		level: 'Advanced',
+		bgColor: '#F3D37C',
+		fgColor: '#000',
+	},
+];
 function App() {
 	return (
 		<main className='container'>
@@ -52,47 +91,29 @@ function MyInfo() {
 }
 
 function SkillList() {
+	const skills = skillsData;
 	return (
 		<ul className='skill-list'>
-			<Skill bgColor='red' skill='Semantic HTML5' emoji='💪' />
-			<Skill
-				bgColor='lightcoral'
-				skill='Modern & Responsive CSS'
-				emoji='💪'
-			/>
-			<Skill bgColor='coral' skill='Bootstrap CSS Library' emoji='💪' />
-			<Skill bgColor='indianred' skill='Sass' emoji='💪' />
-			<Skill bgColor='yellow' skill='JavaScript' emoji='💪' />
-			<Skill bgColor='cornsilk' skill='ReactJS' emoji='👶' />
-			<Skill
-				bgColor='blue'
-				skill='Web Accessibility Development'
-				emoji='💪'
-			/>
-			<Skill
-				bgColor='cornflowerblue'
-				skill='Web Accessibility Testing (VPAT/ARC)'
-				emoji='💪'
-			/>
-			<Skill
-				bgColor='dodgerblue'
-				skill='Web Accessibility Training'
-				emoji='💪'
-			/>
-			<Skill
-				bgColor='lightskyblue'
-				skill='Web Accessibility Remediation'
-				emoji='💪'
-			/>
+			{skills.map(
+				(
+					mySkills, //! Remember .map() loops through an object and adds key/value pair to a new object/array
+				) => (
+					<Skill skillObj={mySkills} key={mySkills.skill} />
+				),
+			)}
 		</ul>
 	);
 }
 
-function Skill(props) {
+function Skill({ skillObj }) {
 	return (
-		<li style={{ backgroundColor: props.bgColor }}>
-			<span>{props.skill}</span>
-			<span>{props.emoji}</span>
+		<li style={{ backgroundColor: skillObj.bgColor }}>
+			<span style={{ color: skillObj.fgColor }}>{skillObj.skill}</span>
+			<span>
+				{skillObj.level === 'Advanced' && '💪'}
+				{skillObj.level === 'Proficient' && '👍'}
+				{skillObj.level === 'Beginner' && '👌'}
+			</span>
 		</li>
 	);
 }
